@@ -9,10 +9,10 @@ import { addUser } from '../utils/userSlice';
 const EditProfile = ({user}) => {
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
-    const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-    const [age, setAge] = useState(user.age);
-    const [gender, setGender] = useState(user.gender);
-    const [about, setAbout] = useState(user.about);
+    const [photoUrl, setPhotoUrl] = useState(user.photoUrl || "");
+    const [age, setAge] = useState(user.age || "");
+    const [gender, setGender] = useState(user.gender || "");
+    const [about, setAbout] = useState(user.about || "");
     const [error, setError] = useState("");
     const dispatch = useDispatch();
     const [showToast, setShowToast] = useState(false);
@@ -21,7 +21,7 @@ const EditProfile = ({user}) => {
         setError("");
         try{
             const res = await axios.patch(BASE_URL + "/profile/edit", {firstName, lastName, photoUrl, age, gender, about}, 
-                { withCredentials: true } 
+              { withCredentials: true } 
             );
             dispatch(addUser(res?.data?.data));
             setShowToast(true);
@@ -30,7 +30,7 @@ const EditProfile = ({user}) => {
             }, 3000);
         }
         catch(err){
-            setError(err.response.data);
+          setError(err.response?.data);
         }
     };
 
@@ -105,7 +105,7 @@ const EditProfile = ({user}) => {
       </div>
         </div>
         <div>
-            <UserCard user={{firstName, lastName, photoUrl, age, gender, about}}/>
+            <UserCard user={{firstName, lastName, photoUrl, age, gender, about}} />
         </div>
         </div>
         {showToast && <div className="toast toast-top toast-center">

@@ -43,7 +43,7 @@ const Requests = () => {
         <div className="text-center my-10">
             <h1 className="text-bold text-white text-3xl">Connection Requests</h1>
             {requests.map((request) => {
-                const { _id, firstName, lastName, photoUrl, age, gender, about } = request.fromUserId;
+                const { _id, firstName, lastName, photoUrl, age, gender, about, skills } = request.fromUserId;
 
                 return (
                     <div key={_id} className="flex justify-between items-center m-4 p-4 rounded-lg bg-base-300 w-full mx-auto">
@@ -52,10 +52,11 @@ const Requests = () => {
                             <h3 className="font-bold text-xl">{firstName + " " + lastName}</h3>
                             {age && gender && <p>{age + ", " + gender}</p>}
                             <p>{about}</p>
+                            <p>{skills}</p>
                         </div> 
                         <div>
-                            <button className="btn btn-primary mx-2" onClick={() => reviewRequest("Rejected", request._id)}>Reject</button>
-                            <button className="btn btn-secondary mx-2" onClick={() => reviewRequest("Accepted", request._id)}>Accept</button>
+                            <button className="btn btn-primary mx-2 my-1" onClick={() => reviewRequest("Rejected", request._id)}>Reject</button>
+                            <button className="btn btn-secondary mx-2my-1" onClick={() => reviewRequest("Accepted", request._id)}>Accept</button>
                         </div> 
                     </div>
                 )
@@ -65,6 +66,7 @@ const Requests = () => {
 };
 
 export default Requests
+
 
 
 

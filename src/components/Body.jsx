@@ -15,7 +15,10 @@ const Body = () => {
   const userData = useSelector((store) => store.user);
 
   const fetchUser = async () => {
-    if(userData) return;
+    if(userData) {
+      console.log(userData);
+      return;
+    };
     try{
       const res = await axios.get(BASE_URL + "/profile/view", { withCredentials: true} );
       dispatch(addUser(res.data));
@@ -24,7 +27,6 @@ const Body = () => {
       if(err.status == 401){
         navigate("/login");
       }
-      console.error(err);
     }
   };
 

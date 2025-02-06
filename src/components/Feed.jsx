@@ -8,15 +8,16 @@ import UserCard from "./UserCard";
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
   const dispatch = useDispatch();
-  console.log(feed);
 
   const getFeed = async () => {
     if(feed) return;
     try{
-      const res = await axios.get(BASE_URL + "/user/feed", { withCredentials: true });
-      if (res?.data?.data) {
-        dispatch(addFeed(res.data.data));
-      } else {
+      const res = await axios.get(BASE_URL + "/feed", { withCredentials: true });
+
+      if(res?.data?.data){
+        dispatch(addFeed(res?.data?.data));
+      } 
+      else {
         console.error("No data found in the response");
       }
     }
@@ -33,16 +34,16 @@ const Feed = () => {
 
   if(feed.length <= 0) return <h1 className="flex justify-center my-10">No new users found!!</h1>
 
-  return feed && (
-    <div className="flex justify-center my-10">
-      <UserCard user={feed[0]}/>
-    </div>
-  )
-}
+  return (
+    feed && (
+      <div className="flex justify-center my-10">
+        <UserCard user={feed[0]}/>
+      </div>
+    )
+  );
+};
 
 export default Feed;
-
-
 
 
 

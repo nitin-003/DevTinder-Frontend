@@ -12,13 +12,12 @@ const Requests = () => {
 
     const reviewRequest = async (status, _id) => {
         try{
-            // const res = axios.post(BASE_URL + "/request/review/" + status + "/" + _id, {}, {withCredentials: true});
-            const res = axios.post(`${BASE_URL}/request/review/${status.toLowerCase()}/${_id}`, {}, {withCredentials: true});
-
+            const res = axios.post(`${BASE_URL}/request/review/${status.toLowerCase()}/${_id}`, {}, { withCredentials: true });
+    
             dispatch(removeRequest(_id));
         }
         catch(err){
-            console.error(err);
+            console.error(err.message);
         }
     };
 

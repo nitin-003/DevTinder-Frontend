@@ -18,9 +18,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try{
-      const res = await axios.post(BASE_URL + "/auth/login", 
-        { emailId, password }, { withCredentials: true }
-      );
+      const res = await axios.post(BASE_URL + "/login", { emailId, password }, { withCredentials: true });
       dispatch(addUser(res.data));
       return navigate("/");
     }
@@ -31,7 +29,7 @@ const Login = () => {
 
   const handleSignUp = async () => {
     try{
-      const res = await axios.post(BASE_URL + "/auth/signup", 
+      const res = await axios.post(BASE_URL + "/signup", 
         { firstName, lastName, emailId, password }, { withCredentials: true }
       );
 

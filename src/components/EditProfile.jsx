@@ -21,18 +21,17 @@ const EditProfile = ({ user }) => {
   const saveProfile = async () => {
     setError("");
     try {
-      const res = await axios.patch(
-        BASE_URL + "/profile/edit",
-        { firstName, lastName, photoUrl, age, gender, about, skills },
-        { withCredentials: true }
-      );
+      const res = await axios.patch(BASE_URL + "/profile/edit", { firstName, lastName, photoUrl, age, gender, about, skills }, { withCredentials: true });
       dispatch(addUser(res?.data?.data));
+
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
       }, 3000);
-    } catch (err) {
-      setError(err.response?.data);
+
+    } 
+    catch (err) {
+      setError(err?.response?.data);
     }
   };
 
@@ -149,5 +148,6 @@ const EditProfile = ({ user }) => {
 };
 
 export default EditProfile;
+
 
 

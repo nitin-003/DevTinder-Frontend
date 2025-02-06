@@ -15,8 +15,7 @@ const Body = () => {
   const userData = useSelector((store) => store.user);
 
   const fetchUser = async () => {
-    if(userData) {
-      console.log(userData);
+    if(userData){
       return;
     };
     try{
@@ -27,6 +26,7 @@ const Body = () => {
       if(err.status == 401){
         navigate("/login");
       }
+      console.error(err);
     }
   };
 

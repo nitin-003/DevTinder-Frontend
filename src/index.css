@@ -2,4 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans bg-base-200 text-base-content antialiased;
+  }
+}
 
+@keyframes toast-slide-in {
+  from { opacity: 0; transform: translateX(1.5rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Tooltips: invert against the page so they are readable in both themes */
+[data-theme="light"] .tooltip {
+  --tooltip-color: #1f2430;
+  --tooltip-text-color: #ffffff;
+}
+[data-theme="dark"] .tooltip {
+  --tooltip-color: #f1f1f6;
+  --tooltip-text-color: #15151c;
+}
+.tooltip:before {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.25);
+  z-index: 60;
+}
+/* touch screens have no hover, a tooltip would just stick after a tap */
+@media (hover: none) {
+  .tooltip:before,
+  .tooltip:after {
+    display: none;
+  }
+}
+
+@layer components {
+  .toast-slide-in {
+    animation: toast-slide-in 0.25s ease-out;
+  }
+  .brand-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
+  .brand-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+  .surface-card {
+    @apply bg-base-100 rounded-2xl border border-base-content/10 shadow-sm;
+  }
+}

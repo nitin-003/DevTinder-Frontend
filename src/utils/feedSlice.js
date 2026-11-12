@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { removeUser } from "./userSlice";
 
 const feedSlice = createSlice({
     name: 'feed',
@@ -9,6 +10,10 @@ const feedSlice = createSlice({
             const newFeed = state.filter((user) => user._id !== action.payload);
             return newFeed;
         },
+    },
+    // Drop cached feed whenever the session ends
+    extraReducers: (builder) => {
+        builder.addCase(removeUser, () => null);
     },
 });
 
